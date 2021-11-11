@@ -4,6 +4,8 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
+
+app.get('/', (req, res) => res/send('API is Running'));
 const port = process.env.PORT || 5000;
 
 app.use(cors());
