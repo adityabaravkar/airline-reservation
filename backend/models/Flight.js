@@ -13,17 +13,19 @@ const flightSchema = new mongoose.Schema({
     },
     flightNo: {
         type: String,
-        required: true
+        required: true,
+        // Since a flight can only be going from one place to another...
+        unique: true
     },
     arrivalDate: {
         type: Date,
         // DISABLING FOR TESTING
-        // required: true
+         required: true
     },
     departureDate: {
         type: Date,
         // DISABLING FOR TESTING
-        // required: true
+         required: true
     },
     //Seat object is an array; I dunno how this works yet so putting placeholder code here for now...
     seatStatus: {
@@ -31,13 +33,13 @@ const flightSchema = new mongoose.Schema({
         type: Array,
         // FIX ME: confirm whether this is required? how do we pass a constructor of certain type in js?
         // DISABLING FOR TESTING
-        // required: true
+         required: true
     },
     employedBy: {
         // FIX ME: is supposed to be an 'airline' type object so... I dunno?
         type: Airline,
         // DISABLING FOR TESTING
-        // required: true
+         required: true
     }
 
 });
