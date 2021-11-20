@@ -1,17 +1,22 @@
 "use strict";
 
-const Joi = require("joi");
-Joi.objectId = require("joi-objectid")(Joi);
+const { check } = require("express-validator");
+const User = require("../models/user.model");
 
 module.exports = {
-  create: {
-    body: {
-      email: Joi.string().email().required(),
-      password: Joi.string().min(6).max(128).required(),
-      fname: Joi.string().max(128).required(),
-      lname: Joi.string().max(128).required(),
-      address: Joi.string().max(12800),
-      phoneNumber: Joi.string().max(128),
-    },
-  },
+  create: [
+    check("email", "Please enter valid email.")
+      .isEmail()
+      .bail()
+      .custom((value) => User.checkDuplicateEmailError(value)),
+    check("password", "Invalid password.").isLength({ min: 6, max: 128 }),
+    check("fname", "Please enter first name.")
+      .isLength({ max: 128 })
+      .notEmpty(),
+    check("lname", "Please enter last name.").isLength({ max: 128 }).notEmpty(),
+    check("address", "Please enter address.").isLength({ max: 12800 }),
+    check("phoneNumber", "Please enter valid phone number.")
+      .optional()
+      .isMobilePhone(),
+  ],
 };

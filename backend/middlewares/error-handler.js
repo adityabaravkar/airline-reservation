@@ -15,7 +15,7 @@ exports.handleError = (err, req, res, next) => {
   res.json({
     message: err.message,
     extra: err.extra,
-    errors: err,
+    errors: err.errors,
   });
   res.end();
 };
