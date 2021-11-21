@@ -2,6 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const errorHandler = require("./middlewares/error-handler");
 const connectDB = require("./config/db");
+const passport = require("passport");
+const { auth } = require("./utils/passport");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
@@ -15,6 +19,25 @@ app.use(
     extended: false,
   })
 );
+
+//passport.js setup
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
+app.use(
+  session({
+    key: "user_sid",
+    secret: "cmpe202secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 6000000,
+    },
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+auth();
+//passport.js setup ends
 
 //Establish DB connection
 connectDB();
