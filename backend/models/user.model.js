@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt-nodejs");
 const httpStatus = require("http-status");
+const APIError = require("../utils/APIError");
 const Schema = mongoose.Schema;
 
 const roles = ["customer", "employee"];
@@ -85,6 +86,23 @@ userSchema.method({
   passwordMatches(password) {
     return bcrypt.compareSync(password, this.password);
   },
+
+  updateTransform() {
+    const transformed = {};
+    const fields = [
+      "id",
+      "fname",
+      "lname",
+      "email",
+      "role",
+      "address",
+      "phoneNumber",
+    ];
+    fields.forEach((field) => {
+      transformed[field] = this[field];
+    });
+    return transformed;
+  },
 });
 
 userSchema.statics = {
@@ -95,6 +113,24 @@ userSchema.statics = {
     if (user) {
       return Promise.reject("Email already taken");
     }
+  },
+
+  async findAndGenerateToken(payload) {
+    const { email, password } = payload;
+    if (!email) throw new APIError("Email must be provided for login");
+
+    const user = await this.findOne({ email });
+    if (!user)
+      throw new APIError(
+        `No user associated with ${email}`,
+        httpStatus.NOT_FOUND
+      );
+
+    const passwordOK = await user.passwordMatches(password);
+    if (!passwordOK)
+      throw new APIError(`Password mismatch`, httpStatus.UNAUTHORIZED);
+
+    return user;
   },
 };
 

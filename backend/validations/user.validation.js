@@ -19,4 +19,17 @@ module.exports = {
       .optional()
       .isMobilePhone(),
   ],
+
+  update: [
+    check("id", "Invalid ID.").isMongoId(),
+    check("email", "Please enter valid email.").isEmail(),
+    check("fname", "Please enter first name.")
+      .isLength({ max: 128 })
+      .notEmpty(),
+    check("lname", "Please enter last name.").isLength({ max: 128 }).notEmpty(),
+    check("address", "Please enter address.").isLength({ max: 12800 }),
+    check("phoneNumber", "Please enter valid phone number.")
+      .optional()
+      .isMobilePhone(),
+  ],
 };

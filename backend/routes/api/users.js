@@ -1,7 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const userController = require("../../controllers/user.controller");
+const { update } = require("../../validations/user.validation");
+const { checkAuth } = require("../../middlewares/authorization");
 
-//@route GET api for users
-router.get('/', (req, res) => res.send('route: users'));
+router.get("/detail/:userid", checkAuth, userController.detail);
+router.post("/update", checkAuth, update, userController.update);
 
 module.exports = router;
