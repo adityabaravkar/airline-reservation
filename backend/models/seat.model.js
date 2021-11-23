@@ -10,15 +10,19 @@ const seatSchema = new Schema(
       required: true,
       unique: true,
     },
-    isBooked: {
-      type: Boolean,
+    row:{
+      type: String,
+      required: true,
     },
+    // isBooked: {
+    //   type: Boolean,
+    // },
     seatType: {
       type: String,
       maxlength: 50,
     },
     pointsRewarded: {
-        typr: Number,
+      typr: Number,
     },
   },
   {
