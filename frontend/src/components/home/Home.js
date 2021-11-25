@@ -57,17 +57,15 @@ export default class Home extends Component {
 
     const login_code = (
       <li class="nav-item dropdown nav-non-btn">
-        <a
-          href
-          class="nav-link custom-nav-link dropdown-toggle"
+        <button
+          class="button-link nav-link custom-nav-link dropdown-toggle"
           id="navbarDropdown"
-          role="button"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
         >
           Login
-        </a>
+        </button>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <Link class="dropdown-item" to={LOGIN_CUSTOMER}>
             Customer Login
@@ -82,9 +80,9 @@ export default class Home extends Component {
     const user_code = (
       <Link to={CUSTOMER_PROFILE}>
         <li class="nav-item nav-non-btn">
-          <a href class="nav-link custom-nav-link">
+          <button class="button-link nav-link custom-nav-link">
             {userName}
-          </a>
+          </button>
         </li>
       </Link>
     );
@@ -120,12 +118,9 @@ export default class Home extends Component {
                     ? login_code
                     : user_code}
                   <li class="nav-item dropdown nav-non-btn">
-                    <a
-                      href
-                      class="nav-link custom-nav-link disabled dropdown-toggle"
-                    >
+                    <button class="button-link nav-link custom-nav-link disabled dropdown-toggle">
                       Help
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </div>

@@ -128,7 +128,7 @@ span.Title {
 }
 
 .search-engine-input {
-  padding: 10px 3px 10px 3px;
+  padding: 10px 3px 10px 5px;
 }
 
 .searchEngine {
@@ -157,4 +157,12 @@ span.Title {
 .logo-image {
   height: 2.5em;
   width: 10em;
+}
+
+.button-link {
+  background: none !important;
+  border: none;
+  color: #069;
+  text-decoration: none;
+  cursor: pointer;
 }

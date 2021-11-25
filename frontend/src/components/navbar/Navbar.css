@@ -1,0 +1,17 @@
+.generic-navbar-element {
+  padding: 10px 10px 10px 10px;
+}
+.generic-navbar-header {
+  border-bottom: 1px solid #dbdbdb;
+  background: #212e42;
+}
+
+.logout-image {
+  height: 1.8em;
+  width: 2em;
+}
+
+.logo-image {
+  height: 2.5em;
+  width: 10em;
+}
