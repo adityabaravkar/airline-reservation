@@ -16,6 +16,10 @@ export class Authentication {
     return localStorage.getItem("token");
   }
 
+  static get bearerToken() {
+    return "Bearer " + localStorage.getItem("token");
+  }
+
   static get userId() {
     return localStorage.getItem("userId");
   }

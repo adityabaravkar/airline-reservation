@@ -205,6 +205,7 @@ export default class Home extends Component {
                               className="search-engine-input-text-box form-control border-left-0"
                               name="date"
                               type="text"
+                              title="MM/dd/yyyy"
                               placeholder="When?"
                               value={this.state.date || ""}
                               onChange={this.handleInputChange}
