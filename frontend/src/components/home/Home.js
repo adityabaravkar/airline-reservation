@@ -56,9 +56,9 @@ export default class Home extends Component {
     }
 
     const login_code = (
-      <li class="nav-item dropdown nav-non-btn">
+      <li className="nav-item dropdown nav-non-btn">
         <button
-          class="button-link nav-link custom-nav-link dropdown-toggle"
+          className="button-link nav-link custom-nav-link dropdown-toggle"
           id="navbarDropdown"
           data-toggle="dropdown"
           aria-haspopup="true"
@@ -66,11 +66,11 @@ export default class Home extends Component {
         >
           Login
         </button>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <Link class="dropdown-item" to={LOGIN_CUSTOMER}>
+        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+          <Link className="dropdown-item" to={LOGIN_CUSTOMER}>
             Customer Login
           </Link>
-          <Link class="dropdown-item" to={LOGIN_EMPLOYEE}>
+          <Link className="dropdown-item" to={LOGIN_EMPLOYEE}>
             Employee Login
           </Link>
         </div>
@@ -79,8 +79,8 @@ export default class Home extends Component {
 
     const user_code = (
       <Link to={CUSTOMER_PROFILE}>
-        <li class="nav-item nav-non-btn">
-          <button class="button-link nav-link custom-nav-link">
+        <li className="nav-item nav-non-btn">
+          <button className="button-link nav-link custom-nav-link">
             {userName}
           </button>
         </li>
@@ -90,13 +90,17 @@ export default class Home extends Component {
     return (
       <div>
         <header>
-          <div class="banner box-shadow">
-            <nav class="navbar navbar-expand-lg navbar-light">
-              <Link class="navbar-brand" to="/">
-                <img class="logo-image" alt="Airlines" src="/logo.png"></img>
+          <div className="banner box-shadow">
+            <nav className="navbar navbar-expand-lg navbar-light">
+              <Link className="navbar-brand" to="/">
+                <img
+                  className="logo-image"
+                  alt="Airlines"
+                  src="/logo.png"
+                ></img>
               </Link>
               <button
-                class="navbar-toggler"
+                className="navbar-toggler"
                 type="button"
                 data-toggle="collapse"
                 data-target="#navbarSupportedContent"
@@ -104,74 +108,61 @@ export default class Home extends Component {
                 aria-expanded="false"
                 aria-label="Toggle navigation"
               >
-                <span class="navbar-toggler-icon"></span>
+                <span className="navbar-toggler-icon"></span>
               </button>
 
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav ml-auto">
-                  <li class="nav-item active nav-non-btn">
-                    <span class="flag-icon flag-icon-us flag-icon-squared"></span>
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <ul className="nav navbar-nav ml-auto">
+                  <li className="nav-item active nav-non-btn">
+                    <span className="flag-icon flag-icon-us flag-icon-squared"></span>
                   </li>
                   {userName === "" ||
                   userName === undefined ||
                   userName === null
                     ? login_code
                     : user_code}
-                  <li class="nav-item dropdown nav-non-btn">
-                    <button class="button-link nav-link custom-nav-link disabled dropdown-toggle">
+                  <li className="nav-item dropdown nav-non-btn">
+                    <button className="button-link nav-link custom-nav-link disabled dropdown-toggle">
                       Help
                     </button>
                   </li>
                 </ul>
               </div>
 
-              <Link class="navbar-brand float-right" to={LOGOUT}>
-                <img class="logout-image" alt="Logout" src="/logout.png"></img>
+              <Link className="navbar-brand float-right" to={LOGOUT}>
+                <img
+                  className="logout-image"
+                  alt="Logout"
+                  src="/logout.png"
+                ></img>
               </Link>
             </nav>
 
-            <div class="container-fluid">
-              <div class="Poster">
-                <div class="PosterCover">
-                  <div class="PosterData">
-                    <h1 class="Title">
-                      <span class="Title">Search Flights</span>
+            <div className="container-fluid">
+              <div className="Poster">
+                <div className="PosterCover">
+                  <div className="PosterData">
+                    <h1 className="Title">
+                      <span className="Title">Search Flights</span>
                     </h1>
 
-                    <div class="row searchEngine">
-                      <form class="searchEngineForm form-inline">
-                        <div class="search-engine-input col-lg-4">
-                          <div class="input-group ">
-                            <div class="input-group-prepend">
+                    <div className="row searchEngine">
+                      <form className="searchEngineForm form-inline">
+                        <div className="search-engine-input col-lg-4">
+                          <div className="input-group ">
+                            <div className="input-group-prepend">
                               <span
-                                class="input-group-text border-right-0"
+                                className="input-group-text border-right-0"
                                 id="basic-addon1"
                               >
-                                <i class="icon ion-ios-map"></i>
+                                <i className="icon ion-ios-map"></i>
                               </span>
                             </div>
                             <input
-                              class="search-engine-input-text-box form-control border-left-0"
-                              placeholder="Where to?"
-                              type="text"
-                              name="destination"
-                              value={this.state.destination || ""}
-                              onChange={this.handleInputChange}
-                            />
-                          </div>
-                        </div>
-                        <div class="search-engine-input col-lg-4">
-                          <div class="input-group ">
-                            <div class="input-group-prepend">
-                              <span
-                                class="input-group-text border-right-0"
-                                id="basic-addon1"
-                              >
-                                <i class="icon ion-ios-map"></i>
-                              </span>
-                            </div>
-                            <input
-                              class="search-engine-input-text-box form-control border-left-0"
+                              className="search-engine-input-text-box form-control border-left-0"
                               placeholder="From where?"
                               type="text"
                               name="origin"
@@ -180,30 +171,50 @@ export default class Home extends Component {
                             />
                           </div>
                         </div>
-                        <div class="search-engine-input col-lg-3">
-                          <div class="input-group ">
-                            <div class="input-group-prepend">
+                        <div className="search-engine-input col-lg-4">
+                          <div className="input-group ">
+                            <div className="input-group-prepend">
                               <span
-                                class="input-group-text border-right-0"
-                                id="basic-addon3"
+                                className="input-group-text border-right-0"
+                                id="basic-addon1"
                               >
-                                <i class="icon ion-ios-calendar"></i>
+                                <i className="icon ion-ios-map"></i>
                               </span>
                             </div>
                             <input
-                              class="search-engine-input-text-box form-control border-left-0"
-                              name="endDate"
+                              className="search-engine-input-text-box form-control border-left-0"
+                              placeholder="Where to?"
                               type="text"
-                              placeholder="Depart"
+                              name="destination"
+                              value={this.state.destination || ""}
+                              onChange={this.handleInputChange}
+                            />
+                          </div>
+                        </div>
+                        <div className="search-engine-input col-lg-3">
+                          <div className="input-group ">
+                            <div className="input-group-prepend">
+                              <span
+                                className="input-group-text border-right-0"
+                                id="basic-addon3"
+                              >
+                                <i className="icon ion-ios-calendar"></i>
+                              </span>
+                            </div>
+                            <input
+                              className="search-engine-input-text-box form-control border-left-0"
+                              name="date"
+                              type="text"
+                              placeholder="When?"
                               value={this.state.date || ""}
                               onChange={this.handleInputChange}
                             />
                           </div>
                         </div>
-                        <div class="search-engine-input col-lg-1 ">
+                        <div className="search-engine-input col-lg-1 ">
                           <button
                             type="submit"
-                            class="btn btn-primary search-engine-button"
+                            className="btn btn-primary search-engine-button"
                             onClick={this.handleSubmit}
                           >
                             Search
@@ -212,27 +223,29 @@ export default class Home extends Component {
                       </form>
                     </div>
                   </div>
-                  <div class="Feature">
-                    <ul class="Feature">
-                      <li class="Feature">
-                        <strong class="Feature">
+                  <div className="Feature">
+                    <ul className="Feature">
+                      <li className="Feature">
+                        <strong className="Feature">
                           Your whole vacation starts here
                         </strong>
-                        <span class="Feature">
+                        <span className="Feature">
                           Choose a flight from the world's best selection
                         </span>
                       </li>
-                      <li class="Feature">
-                        <strong class="Feature">
+                      <li className="Feature">
+                        <strong className="Feature">
                           Book and fly with confidence
                         </strong>
-                        <span class="Feature">
+                        <span className="Feature">
                           Secure payments, peace of mind
                         </span>
                       </li>
-                      <li class="Feature">
-                        <strong class="Feature">Your journey your way</strong>
-                        <span class="Feature">
+                      <li className="Feature">
+                        <strong className="Feature">
+                          Your journey your way
+                        </strong>
+                        <span className="Feature">
                           More space, more privacy, no compromises
                         </span>
                       </li>

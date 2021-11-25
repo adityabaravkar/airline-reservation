@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "../home/Home.js";
 import LoginCustomer from "../login/LoginCustomer.js";
 import Logout from "../logout/Logout.js";
@@ -9,13 +9,13 @@ export default class Main extends Component {
   render() {
     return (
       <div>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/home" component={Home} />
-          <Route path="/signup-customer" component={SignupCustomer} />
-          <Route path="/login-customer" component={LoginCustomer} />
-          <Route exact path="/logout" component={Logout}></Route>
-        </Switch>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/home" element={<Home />} />
+          <Route path="/signup-customer" element={<SignupCustomer />} />
+          <Route path="/login-customer" element={<LoginCustomer />} />
+          <Route exact path="/logout" element={<Logout />} />
+        </Routes>
       </div>
     );
   }
