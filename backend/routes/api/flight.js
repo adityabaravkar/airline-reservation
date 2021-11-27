@@ -3,6 +3,7 @@ const express = require ('express');
 const router = express.Router();
 // This helps us validate post entries and makes giving back errors a lot easier!
 const {check, validationResult} = require('express-validator/check');
+const Flight = require ("../../models/Flight");
 
 // @route   POST api/flight
 // @desc    Add Flight data
@@ -33,16 +34,94 @@ router.post(
         // Airline field (i.e. a custom object denoting the user/owner of the flight)
         check('isEmployedBy','Please enter Flight Employer.').not().isEmpty(),
     ],
-    (req, res) => {
+    async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()){
             // returns an array of the auto-generated errors and error descriptions
             return res.status(400).json({ errors: errors.array()});
         }
+        // if the request is valid, we do the following:
+        const {
+            departureFrom,   // departureFrom
+            arrivalAt,     // arrivalAt
+            flightNo,      // flightNo; NOTE: used as primary key
+            arrivalDate,     // arrivateDate
+            departureDate,   // departureDate
+            seatStatus,       // seatStatus[]
+            isEmployedBy     // employedBy
+        } = req.body
+
+        const flightFields ={};
+
+        // FIX ME: This section will probably need debugging.
+
+        // Initialize and declare-define a flight object
+        //flightFields.airline = req.airline.id;
+
+        if (departureFrom){
+            flightFields.departureFrom = departureFrom;
+        }
+        if (arrivalAt){
+            flightFields.arrivalAt = arrivalAt;
+        }
+        if (flightNo){
+            flightFields.flightNo = flightNo;
+        }
+        if (arrivalDate){
+            flightFields.arrivalDate = Date.parse(arrivalDate);
+        }
+        if (departureDate){
+            flightFields.departureDate = Date.parse(departureDate);
+        }
+        if (seatStatus){
+            flightFields.seatStatus = seatStatus.split(',').map(val => val.trim());
+        }
+        // NOTE: This clause relies upon the Airline Model implementation!
+        if (isEmployedBy){
+            //flightFields.isEmployedBy = req.airline.id;
+        }
+
+        // Implementing find and find + update clauses for model
+        // FIX ME: THIS IS FAILING!
+        try{
+            // NOTE: for testing!
+            console.log ('got till try start');
+            let flight = await Flight.findOne({ flightNo });
+            console.log ('got till here.');
+            // if flight exists already, update its values/contents
+            if (flight){
+                // NOTE: for testing!
+                console.log('found flight in DB!');
+                flight = await Flight.findOneAndUpdate(
+                    // NOTE: Would this be 'req.flightNo.id'? Since the flightNo is a unique attrib, do we really need to log/search by object id?  
+                    { flight: req.flightNo },
+                    { $set: flightFields },
+                    { new: true }  
+                );
+                return res.json(flight);
+            }
+            // NOTE: for testing!
+            console.log('Flight not found. Creating obj for model...');
+            // since it was not found...
+            flight = new Flight(flightFields);
+            // Save as new obj/field to DB
+            await flight.save();
+            res.json(flight);
+        }
+        catch(err){
+            console.error (err.message);
+            res.status(500).send('Server Error: Flight');
+        }
+
+        res.send('Hellaye; check check');
+        
+        
+
+
         // prints the body of the request which is defined above
-        console.log(req.body);
+        //console.log(req.body);
         // Send the following response using the API
-        res.send ('Flight router page');
+        //res.send ('Flight router page');
     }
 );
 
