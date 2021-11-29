@@ -23,7 +23,7 @@ export default class GlobalNavbar extends Component {
                 <div className="col-lg-2">
                   <Link className="global-navbar-element" to="/">
                     <img
-                      alt="Homeaway"
+                      alt="American Airlines"
                       className="global-navbar-logo"
                       src="/logo.png"
                     ></img>
@@ -83,7 +83,10 @@ export default class GlobalNavbar extends Component {
                 </div>
                 <div className="col-lg-1">
                   <Link to={LOGOUT}>
-                    <i className="global-navbar-element navbar-brand global-navbar-right-icon">
+                    <i
+                      className="global-navbar-element navbar-brand global-navbar-right-icon"
+                      title="Logout"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="22"
