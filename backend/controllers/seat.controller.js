@@ -4,8 +4,6 @@ const Seat = require("../models/seat.model");
 
 exports.bookSeat = async(req, res) => {
 try{
-
-
     const seat = await Seat.findOne({
         seatNo : req.body.seatNo,
     });
