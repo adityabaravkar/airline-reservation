@@ -8,6 +8,7 @@ import Profile from "../profile/Profile.js";
 import { Authentication } from "../../services";
 import { LOGIN_CUSTOMER } from "../../data";
 import NotFound from "../common/NotFound.js";
+import LoginEmployee from "../login/LoginEmployee.js";
 
 export default class Main extends Component {
   render() {
@@ -19,6 +20,8 @@ export default class Main extends Component {
           <Route path="/signup-customer" component={SignupCustomer} />
           <Route path="/login-customer" component={LoginCustomer} />
           <Route exact path="/logout" component={Logout} />
+
+          <Route path="/login-employee" component={LoginEmployee} />
 
           <CustomerPrivateRoute path="/customer/profile" component={Profile} />
 

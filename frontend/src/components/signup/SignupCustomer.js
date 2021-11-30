@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { API_ENDPOINT } from "../../data/environment";
 
-import Navbar from "../navbar/Navbar.js";
+import Navbar from "../common/Navbar.js";
 import "./SignupCustomer.css";
 import { LOGIN_CUSTOMER } from "../../data/";
 import { Link } from "react-router-dom";
