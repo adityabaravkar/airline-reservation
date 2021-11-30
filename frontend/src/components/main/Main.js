@@ -7,6 +7,7 @@ import SignupCustomer from "../signup/SignupCustomer.js";
 import Profile from "../profile/Profile.js";
 import { Authentication } from "../../services";
 import { LOGIN_CUSTOMER } from "../../data";
+import NotFound from "../common/NotFound.js";
 
 export default class Main extends Component {
   render() {
@@ -20,6 +21,8 @@ export default class Main extends Component {
           <Route exact path="/logout" component={Logout} />
 
           <CustomerPrivateRoute path="/customer/profile" component={Profile} />
+
+          <Route component={NotFound} />
         </Switch>
       </div>
     );
