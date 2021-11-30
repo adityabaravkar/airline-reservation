@@ -4,20 +4,33 @@ const router = express.Router();
 // This helps us validate post entries and makes giving back errors a lot easier!
 const {check, validationResult} = require('express-validator/check');
 const Flight = require ("../../models/Flight");
+const User = require ('../../models/user.model');
+//const Airline =  require ("../../models/Airline")
+
+// @route   GET api/flight/me
+// @desc    get specific Flight data
+// @access  Public
+
+router.get('/me', async (req, res) => {
+    try {
+        const flight = await Flight.findOne({ user: req.user.id }).populate ('user', ['email', 'fName', 'lName']);
+        if (!flight){
+            return res.status (400).json ({ msg: 'No flight found for this user. '});
+        }
+    } catch (err) {
+        console.error (err.message);
+        res.status(500).send('Error: not a valid query!');
+    }
+});
 
 // @route   POST api/flight
 // @desc    Add Flight data
 // @access  Public
 
-/*
-router.post('/', (req, res) => {
-    console.log(req.body);
-    res.send('route: Flight');
-});
-*/
+
 // RETRYING BY CODING AGAIN FROM SCRATCH ABOVE
 router.post(
-    '/',
+    '/me',
     [
         check('departureFrom', 'Please enter the departure location name.').not().isEmpty(),
         check('arrivalAt', 'Please enter the arrival location name.').not().isEmpty(),
@@ -124,5 +137,19 @@ router.post(
         //res.send ('Flight router page');
     }
 );
+
+// @route   GET api/flight
+// @desc    get all Flight-objects!
+// @access  Public
+
+router.get('/', async (req, res) => {
+    try {
+        const flights  = await Flight.find().populate(['flightNo', 'seatStatus']); // make into 'populate('airline', ['flightNo', 'seatStatus'])' once airlineDB implemented
+        res.json(flights);
+    } catch (err) {
+        console.error ('Get all flights error:');
+        res.status(500).send ('Get all flights: Server Error');
+    }
+});
 
 module.exports = router;
