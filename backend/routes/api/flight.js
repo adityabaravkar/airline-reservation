@@ -5,7 +5,7 @@ const router = express.Router();
 const {check, validationResult} = require('express-validator/check');
 const Flight = require ("../../models/Flight");
 const User = require ('../../models/user.model');
-//const Airline =  require ("../../models/Airline")
+const Airline =  require ("../../models/Airline")
 
 // @route   GET api/flight/me
 // @desc    get specific Flight data
@@ -23,12 +23,11 @@ router.get('/me', async (req, res) => {
     }
 });
 
-// @route   POST api/flight
+// @route   POST api/flight/me
 // @desc    Add Flight data
 // @access  Public
 
 
-// RETRYING BY CODING AGAIN FROM SCRATCH ABOVE
 router.post(
     '/me',
     [
@@ -66,9 +65,8 @@ router.post(
 
         const flightFields ={};
 
-        // FIX ME: This section will probably need debugging.
-
         // Initialize and declare-define a flight object
+        // TEST: JUST IMPLEMENTED AIRLINE OBJS
         //flightFields.airline = req.airline.id;
 
         if (departureFrom){

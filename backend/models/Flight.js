@@ -71,7 +71,7 @@ const flightSchema = new mongoose.Schema({
         
         // APPROACH 2: Trying to remodel the object as a mongo db model to mimic object behavior and fields 
         type: String,
-        //type: mongoose.Scheme.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'airline'
 
         // DISABLING FOR TESTING

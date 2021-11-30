@@ -5,12 +5,15 @@ const airlineSchema = new mongoose.Schema ({
         type: String,
         required: true
     },
+    // NOTE: this will act like the primary key for Airline model
     name: {
         type: String,
-        required: true
+        required: true,
+        // making this unique so that it's easier to use this interface; in a real world scenario this would have to be coupled with location and/or be subject to trademark registrations/docs
+        unique: true
     },
     userAcc: {
-        type: mongoose.Scheme.Type.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         // disabled for now; testing for safety and then going to debug-enable this
         //required: true,
         ref: 'user'

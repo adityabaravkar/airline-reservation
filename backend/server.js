@@ -49,6 +49,8 @@ app.use("/api/auth", require("./routes/api/auth.js"));
 app.use("/api/user", require("./routes/api/users.js"));
 // FIX ME: THE FOLLOWING ROUTE IS NOT WORKING! I HAVE DISABLED THE REQUIRED FIELDS AND YET IT IS STILL RESULTING IN 404s INSTEAD OF 400s!
 app.use("/api/flight", require("./routes/api/flight.js"));
+app.use("/api/airline", require("./routes/api/airline.js"));
+
 
 app.use(errorHandler.handleNotFound);
 app.use(errorHandler.handleError);
