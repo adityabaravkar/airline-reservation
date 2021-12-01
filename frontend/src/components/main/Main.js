@@ -11,6 +11,7 @@ import NotFound from "../common/NotFound.js";
 import LoginEmployee from "../login/LoginEmployee.js";
 import SignupEmployee from "../signup/SignupEmployee.js";
 import AddFlight from "../flight/AddFlight.js";
+import Search from "../search/Search.js";
 
 export default class Main extends Component {
   render() {
@@ -27,6 +28,7 @@ export default class Main extends Component {
           <Route path="/signup-employee" component={SignupEmployee} />
 
           <CustomerPrivateRoute path="/customer/profile" component={Profile} />
+          <CustomerPrivateRoute path="/customer/search" component={Search} />
 
           <EmployeePrivateRoute
             path="/employee/flight/add"
