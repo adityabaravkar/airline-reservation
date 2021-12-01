@@ -35,16 +35,16 @@ export default class LoginEmployee extends Component {
     const requestBody = {
       email: this.state.email,
       password: this.state.password,
-      type: "EMPLOYEE",
+      type: "employee",
     };
     axios.post(API_ENDPOINT + LOGIN, requestBody).then((response) => {
-      Authentication.setUserDetails(response.data.data);
-      if (response.data.error === 0) {
+      Authentication.setUserDetails(response.data.user);
+      if (!response.data.errors) {
         this.setState({ message: "" });
         Authentication.setAuthData(
-          response.data.userId,
+          response.data.user.id,
           response.data.token,
-          "EMPLOYEE"
+          "employee"
         );
         this.props.history.push("/");
       } else {

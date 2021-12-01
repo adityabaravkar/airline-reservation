@@ -48,7 +48,7 @@ export default class SignupEmployee extends Component {
       lname: this.state.lname,
       email: this.state.email,
       password: this.state.password,
-      role: "EMPLOYEE",
+      role: "employee",
     };
     axios
       .post(API_ENDPOINT + "/auth/register", requestBody)

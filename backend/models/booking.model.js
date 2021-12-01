@@ -4,31 +4,25 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
 const Schema = mongoose.Schema;
 
-const flightSchema = new Schema(
+const bookingSchema = new Schema(
   {
-    departureFrom: {
+    customerId: {
       type: String,
       required: true,
       index: true,
     },
-    arrivalAt: {
+    flightId: {
       type: String,
       required: true,
       index: true,
     },
     departureDate: {
-      type: Date,
-      maxlength: 50,
+      type: Number,
       required: true,
-    },
-    arrivalDate: {
-      type: Date,
-      maxlength: 50,
-      required: true,
+      index: true,
     },
     price: {
       type: Number,
-      maxlength: 50,
       required: true,
     },
   },
@@ -37,17 +31,10 @@ const flightSchema = new Schema(
   }
 );
 
-flightSchema.method({
+bookingSchema.method({
   transform() {
     const transformed = {};
-    const fields = [
-      "id",
-      "departureFrom",
-      "arrivalAt",
-      "departureDate",
-      "arrivalDate",
-      "price",
-    ];
+    const fields = ["customerId", "flightId", "departureDate", "price"];
     fields.forEach((field) => {
       transformed[field] = this[field];
     });
@@ -55,6 +42,6 @@ flightSchema.method({
   },
 });
 
-flightSchema.plugin(mongoosePaginate);
+bookingSchema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model("Flight", flightSchema);
+module.exports = mongoose.model("Booking", bookingSchema);

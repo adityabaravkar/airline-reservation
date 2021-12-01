@@ -6,10 +6,11 @@ import Logout from "../logout/Logout.js";
 import SignupCustomer from "../signup/SignupCustomer.js";
 import Profile from "../profile/Profile.js";
 import { Authentication } from "../../services";
-import { LOGIN_CUSTOMER } from "../../data";
+import { LOGIN_CUSTOMER, LOGIN_EMPLOYEE } from "../../data";
 import NotFound from "../common/NotFound.js";
 import LoginEmployee from "../login/LoginEmployee.js";
 import SignupEmployee from "../signup/SignupEmployee.js";
+import AddFlight from "../flight/AddFlight.js";
 
 export default class Main extends Component {
   render() {
@@ -26,6 +27,11 @@ export default class Main extends Component {
           <Route path="/signup-employee" component={SignupEmployee} />
 
           <CustomerPrivateRoute path="/customer/profile" component={Profile} />
+
+          <EmployeePrivateRoute
+            path="/employee/flight/add"
+            component={AddFlight}
+          />
 
           <Route component={NotFound} />
         </Switch>
@@ -52,14 +58,14 @@ const CustomerPrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-/* const EmployeePrivateRoute = ({ component: Component, ...rest }) => (
+const EmployeePrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      Authentication.isUserLoggedIntoEmployeeMode() ? (
+      true ? (
         <Component {...props} />
       ) : (
-        <Navigate
+        <Redirect
           to={{
             pathname: LOGIN_EMPLOYEE,
             state: { from: props.location },
@@ -68,4 +74,4 @@ const CustomerPrivateRoute = ({ component: Component, ...rest }) => (
       )
     }
   />
-); */
+);
