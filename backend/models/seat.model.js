@@ -5,6 +5,14 @@ const Schema = mongoose.Schema;
 
 const seatSchema = new Schema(
   {
+    customer : {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    flight : {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'flight',
+    },
     seatNo: {
       type: String,
       required: true,
