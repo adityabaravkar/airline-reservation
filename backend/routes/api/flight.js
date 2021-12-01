@@ -89,7 +89,7 @@ router.post(
         }
         // NOTE: This clause relies upon the Airline Model implementation!
         if (isEmployedBy){
-            //flightFields.isEmployedBy = req.airline.id;
+            flightFields.isEmployedBy = await Airline.findOne({ airline: req.isEmployedBy });
         }
 
         // Implementing find and find + update clauses for model

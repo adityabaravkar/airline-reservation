@@ -13,10 +13,15 @@ const airlineSchema = new mongoose.Schema ({
         unique: true
     },
     userAcc: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: [mongoose.Schema.Types.ObjectId],
         // disabled for now; testing for safety and then going to debug-enable this
         //required: true,
         ref: 'user'
+    },
+    flightsEmployed: {
+        type: [mongoose.Schema.Types.ObjectId],
+        required: true,
+        ref: 'flight'
     }
 });
 

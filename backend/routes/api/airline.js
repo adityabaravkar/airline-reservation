@@ -47,7 +47,8 @@ async (req, res) =>{
     const {
         hQ,
         name,
-        userAcc
+        userAccs,
+        flights
     } = req.body
 
     console.log ('Recieved POST request for this...');
@@ -58,13 +59,19 @@ async (req, res) =>{
 
     // not required yet; will debug and implement
     
-    if (userAcc){
+    airlineFields.hQ = hQ;
+    airlineFields.name = name;
+    airlineFields.flights = flights;
+
+    // takes input as csv; is an array so make sure you pass the POST values as an array! it will overwrite on update!
+    if (userAccs){
         // switching to take object id as direct input
-        airlineFields.userAcc = req.userAcc;
+        airlineFields.userAccs = userAccs.split(',').map(userAc => userAc.trim());
     }
-    
-    airlineFields.hQ = req.hQ;
-    airlineFields.name = req.name;
+    // takes input as csv; stores flight objects by id; similar to userAcc
+    if (flights){
+        airlineFields.flights = flights.split(',').map(flight => flight.trim());
+    }
     
     // now we implement find() and find-and-update() clauses
     
@@ -82,7 +89,7 @@ async (req, res) =>{
         }
 
         console.log('Airline not found. Creating object for airline model ...');
-        airline = new airline(airlineFields);
+        airline = new Airline (airlineFields);
         await airline.save();
         res.json(airline);
 

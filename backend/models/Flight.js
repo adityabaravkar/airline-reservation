@@ -16,7 +16,7 @@ const flightSchema = new mongoose.Schema({
         type: String,
         required: true,
         // Since a flight can only be going from one place to another...
-        unique: true
+        //unique: true
     },
     arrivalDate: {
         type: Date,
@@ -70,7 +70,7 @@ const flightSchema = new mongoose.Schema({
         //type: Airline,
         
         // APPROACH 2: Trying to remodel the object as a mongo db model to mimic object behavior and fields 
-        type: String,
+        //type: String,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'airline'
 
