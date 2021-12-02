@@ -49,7 +49,10 @@ export default class Search extends Component {
         if (response.data.errors) {
           console.log("Search was not completed");
         } else {
-          this.setState({ flightList: response.data.payLoad });
+          this.setState({
+            flightList: response.data.payLoad,
+            pager: response.data.pager,
+          });
         }
       })
       .catch((error) => {
@@ -58,6 +61,23 @@ export default class Search extends Component {
         this.props.history.push(LOGIN_CUSTOMER);
       });
   }
+
+  handlePageChange(page) {
+    const requestBody = {
+      userId: this.state.userId,
+      departureFrom: this.state.departureFrom,
+      arrivalAt: this.state.arrivalAt,
+      departureDate: this.state.departureDate,
+      page,
+    };
+    this.instance.post("/flight/fetch", requestBody).then((response) => {
+      this.setState({
+        flightList: response.data.payLoad,
+        pager: response.data.pager,
+      });
+    });
+  }
+
   componentDidMount() {
     document.title = "American Airlines :: Flight search";
   }
@@ -68,12 +88,61 @@ export default class Search extends Component {
       return <Card flight={flight}></Card>;
     });
 
+    const pagination = () => {
+      if (!this.state) return;
+      if (!this.state.pager) return;
+      if (!this.state.pager.page) return;
+
+      const page = this.state.pager.page;
+      const pages = this.state.pager.pages;
+      return (
+        <div>
+          <nav aria-label="...">
+            <ul className="pagination">
+              {page <= 1 || pages === 1 ? (
+                <li className="page-item disabled">
+                  <span className="page-link">Previous</span>
+                </li>
+              ) : (
+                <li className="page-item">
+                  <a
+                    href="#ignore"
+                    className="page-link"
+                    onClick={() => this.handlePageChange(page - 1)}
+                  >
+                    Previous
+                  </a>
+                </li>
+              )}
+
+              {page === pages || pages === 1 ? (
+                <li className="page-item disabled">
+                  <span className="page-link">Next</span>
+                </li>
+              ) : (
+                <li className="page-item">
+                  <a
+                    href="#ignore"
+                    className="page-link"
+                    onClick={() => this.handlePageChange(page + 1)}
+                  >
+                    Next
+                  </a>
+                </li>
+              )}
+            </ul>
+          </nav>
+        </div>
+      );
+    };
+
     return (
       <div>
         <GlobalNavbar></GlobalNavbar>
         <div className="container search">
           <div className="search-wrapper">
             <div className="row search-box justify-content-start">
+              <div className="col-lg-2 search-box-col"></div>
               <div className="col-lg-3 search-box-col">
                 <div class="search-box-fields">
                   <div className="input-group search-box-input-group">
@@ -140,7 +209,6 @@ export default class Search extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-2 search-box-col"></div>
               <div className="col-lg-1 search-box-col">
                 <div class="search-box-fields">
                   <div className="input-group search-box-input-group">
@@ -159,6 +227,12 @@ export default class Search extends Component {
               <div className="col-2"></div>
               <div className="col-8">{details}</div>
               <div className="col-2"></div>
+            </div>
+            <div class="row">
+              <div class="col-2"></div>
+              <div class="col-8">
+                <div className="search-pagination">{pagination()}</div>
+              </div>
             </div>
           </div>
         </div>

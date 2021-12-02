@@ -3,19 +3,13 @@ import "./Card.css";
 import { Link } from "react-router-dom";
 
 export default class Card extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      image: "",
-    };
-  }
   render() {
     return (
       <div>
         <div class="property-card sugar-card card">
           <div class="row card-row">
             <div class="col-md-4 card-thumbnail">
-              <img src={this.state.image} alt="Flight" class="w-100 h-100" />
+              <img src="/card-image.png" alt="Flight" class="w-100 h-100" />
             </div>
             <div class="col-md-8 px-3">
               <div class="card-block property-card-wrapper px-3">
@@ -29,7 +23,7 @@ export default class Card extends Component {
                 <div className="row">
                   <Link
                     to={{
-                      pathname: "/flight/details",
+                      pathname: "/flight",
                       state: this.props.flight,
                     }}
                   >

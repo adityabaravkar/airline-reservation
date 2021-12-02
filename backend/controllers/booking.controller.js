@@ -32,6 +32,9 @@ exports.fetch = async (req, res, next) => {
         $eq: criteria.departureDate,
       };
     }
+    if (!criteria.page) {
+      criteria.page = 1;
+    }
     const pager = { page: criteria.page, limit: 10 };
     const bookingList = await Booking.paginate(filter, pager);
     const response = {};
