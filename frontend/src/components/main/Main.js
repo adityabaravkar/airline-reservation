@@ -76,7 +76,7 @@ const EmployeePrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      true ? (
+      Authentication.isUserLoggedIntoEmployeeMode() ? (
         <Component {...props} />
       ) : (
         <Redirect
