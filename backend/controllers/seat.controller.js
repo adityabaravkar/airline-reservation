@@ -54,3 +54,10 @@ exports.getBookings = async(req, res) => {
         res.send('No bookings are available');
     }
 }
+
+
+// exports.updateSeat = async(req, res) => {
+//     const seatNo = req.body.seatNo;
+//     const newSeatNo = req.body.newSeatNo;
+
+// }

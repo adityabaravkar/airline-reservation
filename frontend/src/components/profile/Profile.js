@@ -8,7 +8,7 @@ import {
   LOGIN_CUSTOMER,
   LOGIN_EMPLOYEE,
 } from "../../data";
-import GlobalNavbar from "../navbar/GlobalNavbar.js";
+import GlobalNavbar from "../common/GlobalNavbar.js";
 import "./Profile.css";
 export default class Profile extends Component {
   constructor(props) {
@@ -32,6 +32,7 @@ export default class Profile extends Component {
   }
 
   componentDidMount() {
+    document.title = "American Airlines :: Profile";
     this.instance
       .get(FETCH_USER_DETAILS + "/" + Authentication.userId)
       .then((response) => {
@@ -76,7 +77,6 @@ export default class Profile extends Component {
     this.instance
       .post(UPDATE_USER, requestBody)
       .then((response) => {
-        console.log(response);
         if (response.status === 202 || response.status === 200) {
           console.log("User updated successfully");
           this.setState({
@@ -107,7 +107,7 @@ export default class Profile extends Component {
               <div className="col-12">
                 <div className="profile-content-contianer">
                   <div className="profile-content-contianer-wrapper">
-                    <div class="profile-content-contianer-header">
+                    <div className="profile-content-contianer-header">
                       <h3>
                         <span className="profile-content-container-header-title">
                           <strong>Profile Details</strong>
@@ -119,7 +119,7 @@ export default class Profile extends Component {
                       {/* First Name and Last Name */}
                       <div className="row">
                         <div className="col-6">
-                          <div class="profile-fields">
+                          <div className="profile-fields">
                             <div className="input-group profile-content-input-group">
                               <input
                                 className="profile-content-input-text-box form-control"
@@ -133,7 +133,7 @@ export default class Profile extends Component {
                           </div>
                         </div>
                         <div className="col-6">
-                          <div class="profile-fields">
+                          <div className="profile-fields">
                             <div className="input-group profile-content-input-group">
                               <input
                                 className="profile-content-input-text-box form-control"
@@ -150,7 +150,7 @@ export default class Profile extends Component {
                       {/* Email and Phone Number */}
                       <div className="row">
                         <div className="col-6">
-                          <div class="profile-fields">
+                          <div className="profile-fields">
                             <div className="input-group profile-content-input-group">
                               <input
                                 className="profile-content-input-text-box form-control"
@@ -164,7 +164,7 @@ export default class Profile extends Component {
                           </div>
                         </div>
                         <div className="col-6">
-                          <div class="profile-fields">
+                          <div className="profile-fields">
                             <div className="input-group profile-content-input-group">
                               <input
                                 className="profile-content-input-text-box form-control"
@@ -181,7 +181,7 @@ export default class Profile extends Component {
                       {/* Address */}
                       <div className="row">
                         <div className="col-12">
-                          <div class="profile-fields">
+                          <div className="profile-fields">
                             <div className="input-group profile-content-input-group">
                               <input
                                 className="profile-content-input-text-box form-control"
@@ -198,19 +198,19 @@ export default class Profile extends Component {
                       <hr></hr>
                     </div>
                     <div className="profile-content-contianer-footer">
-                      <div class="row">
-                        <div class="col-6">
-                          <span class="profile-content-contianer-footer-text">
+                      <div className="row">
+                        <div className="col-6">
+                          <span className="profile-content-contianer-footer-text">
                             {this.state.displayMessage}
                           </span>
                         </div>
-                        <div class="col-6">
+                        <div className="col-6">
                           <button
                             onClick={this.handleSubmit}
-                            class="btn btn-default profile-content-contianer-footer-button"
+                            className="btn btn-default profile-content-contianer-footer-button"
                             label="Update"
                           >
-                            <span class="profile-content-contianer-footer-button-text">
+                            <span className="profile-content-contianer-footer-button-text">
                               Update Profile
                             </span>
                           </button>

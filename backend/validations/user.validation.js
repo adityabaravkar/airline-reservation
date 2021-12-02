@@ -16,7 +16,7 @@ module.exports = {
     check("lname", "Please enter last name.").isLength({ max: 128 }).notEmpty(),
     check("address", "Please enter address.").isLength({ max: 12800 }),
     check("phoneNumber", "Please enter valid phone number.")
-      .optional()
+      .if((value) => value !== "")
       .isMobilePhone(),
   ],
 
@@ -29,7 +29,7 @@ module.exports = {
     check("lname", "Please enter last name.").isLength({ max: 128 }).notEmpty(),
     check("address", "Please enter address.").isLength({ max: 12800 }),
     check("phoneNumber", "Please enter valid phone number.")
-      .optional()
+      .if((value) => value !== "")
       .isMobilePhone(),
   ],
 };
