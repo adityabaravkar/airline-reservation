@@ -17,9 +17,9 @@ export default class Home extends Component {
     super(props);
     this.state = {
       userId: Authentication.userId,
-      origin: "",
-      destination: "",
-      date: "",
+      departureFrom: "",
+      arrivalAt: "",
+      departureDate: "",
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -165,8 +165,8 @@ export default class Home extends Component {
                               className="search-engine-input-text-box form-control border-left-0"
                               placeholder="From where?"
                               type="text"
-                              name="origin"
-                              value={this.state.origin || ""}
+                              name="departureFrom"
+                              value={this.state.departureFrom || ""}
                               onChange={this.handleInputChange}
                             />
                           </div>
@@ -185,8 +185,8 @@ export default class Home extends Component {
                               className="search-engine-input-text-box form-control border-left-0"
                               placeholder="Where to?"
                               type="text"
-                              name="destination"
-                              value={this.state.destination || ""}
+                              name="arrivalAt"
+                              value={this.state.arrivalAt || ""}
                               onChange={this.handleInputChange}
                             />
                           </div>
@@ -203,11 +203,11 @@ export default class Home extends Component {
                             </div>
                             <input
                               className="search-engine-input-text-box form-control border-left-0"
-                              name="date"
+                              name="departureDate"
                               type="text"
                               title="MM/dd/yyyy"
                               placeholder="When?"
-                              value={this.state.date || ""}
+                              value={this.state.departureDate || ""}
                               onChange={this.handleInputChange}
                             />
                           </div>

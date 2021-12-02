@@ -11,7 +11,7 @@ import {
 export default class GlobalNavbar extends Component {
   render() {
     const address =
-      Authentication.accountType === "EMPLOYEE"
+      Authentication.accountType === "employee"
         ? EMPLOYEE_PROFILE
         : CUSTOMER_PROFILE;
     return (

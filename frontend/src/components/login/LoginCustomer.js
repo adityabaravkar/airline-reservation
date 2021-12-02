@@ -4,7 +4,7 @@ import axios from "axios";
 import { API_ENDPOINT } from "../../data/environment";
 import { Authentication } from "./../../services";
 import { LOGIN, HOME } from "../../data";
-import Navbar from "../navbar/Navbar.js";
+import Navbar from "../common/Navbar.js";
 import "./LoginCustomer.css";
 import { CUSTOMER_SIGNUP } from "../../data/";
 
@@ -39,7 +39,7 @@ export default class LoginCustomer extends Component {
     const requestBody = {
       email: this.state.email,
       password: this.state.password,
-      type: "CUSTOMER",
+      type: "customer",
     };
     axios.post(API_ENDPOINT + LOGIN, requestBody).then((response) => {
       if (!response.data.errors) {
@@ -48,7 +48,7 @@ export default class LoginCustomer extends Component {
         Authentication.setAuthData(
           response.data.user.id,
           response.data.token,
-          "CUSTOMER"
+          "customer"
         );
         this.props.history.push(HOME);
       } else {
