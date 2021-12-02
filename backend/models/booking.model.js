@@ -16,6 +16,16 @@ const bookingSchema = new Schema(
       required: true,
       index: true,
     },
+    departureFrom: {
+      type: String,
+      required: true,
+      index: true,
+    },
+    arrivalAt: {
+      type: String,
+      required: true,
+      index: true,
+    },
     departureDate: {
       type: Date,
       required: true,
@@ -34,7 +44,14 @@ const bookingSchema = new Schema(
 bookingSchema.method({
   transform() {
     const transformed = {};
-    const fields = ["customerId", "flightId", "departureDate", "price"];
+    const fields = [
+      "customerId",
+      "flightId",
+      "departureFrom",
+      "arrivalAt",
+      "departureDate",
+      "price",
+    ];
     fields.forEach((field) => {
       transformed[field] = this[field];
     });

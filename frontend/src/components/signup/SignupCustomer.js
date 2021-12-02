@@ -51,7 +51,7 @@ export default class SignupCustomer extends Component {
       lname: this.state.lname,
       email: this.state.email,
       password: this.state.password,
-      type: "CUSTOMER",
+      type: "customer",
     };
     axios
       .post(API_ENDPOINT + "/auth/register", requestBody)
