@@ -46,7 +46,7 @@ export default class LoginEmployee extends Component {
           response.data.token,
           "employee"
         );
-        this.props.history.push("/");
+        this.props.history.push("/employee/dashboard");
       } else {
         this.setState({ message: response.data.data });
       }

@@ -50,7 +50,7 @@ app.use("/api/user", require("./routes/api/users.js"));
 app.use("/api/flight", require("./routes/api/flight.js"));
 app.use("/api/booking", require("./routes/api/booking.js"));
 app.use("/api/seat", require("./routes/api/seat"));
-app.use("/api/airline", require("./routes/api/airline.js"));
+//app.use("/api/airline", require("./routes/api/airline.js"));
 
 app.use(errorHandler.handleNotFound);
 app.use(errorHandler.handleError);

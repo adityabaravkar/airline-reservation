@@ -33,11 +33,11 @@ export class Authentication {
   }
 
   static isUserLoggedIntoCustomerMode() {
-    return this.token && this.userId && this.accountType === "CUSTOMER";
+    return this.token && this.userId && this.accountType === "customer";
   }
 
   static isUserLoggedIntoEmployeeMode() {
-    return this.token && this.userId && this.accountType === "EMPLOYEE";
+    return this.token && this.userId && this.accountType === "employee";
   }
 
   static logout() {
