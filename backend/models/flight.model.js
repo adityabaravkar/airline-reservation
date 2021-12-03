@@ -6,10 +6,6 @@ const Schema = mongoose.Schema;
 
 const flightSchema = new Schema(
   {
-    FlightName:{
-      type: String,
-      required: true,
-    },
     departureFrom: {
       type: String,
       required: true,
@@ -49,8 +45,7 @@ flightSchema.method({
   transform() {
     const transformed = {};
     const fields = [
-      "id",
-      "FlightName",
+      // "id",
       "departureFrom",
       "arrivalAt",
       "departureDate",

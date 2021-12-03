@@ -44,6 +44,10 @@ const userSchema = new Schema(
       default: "",
       maxlength: 50,
     },
+    mileagePoints:{
+      type: Number,
+      default: 50,
+    },
   },
   {
     timestamps: true,
@@ -76,6 +80,7 @@ userSchema.method({
       "role",
       "address",
       "phoneNumber",
+      "mileagePoints",
     ];
     fields.forEach((field) => {
       transformed[field] = this[field];
@@ -97,6 +102,7 @@ userSchema.method({
       "role",
       "address",
       "phoneNumber",
+      "mileagePoints",
     ];
     fields.forEach((field) => {
       transformed[field] = this[field];

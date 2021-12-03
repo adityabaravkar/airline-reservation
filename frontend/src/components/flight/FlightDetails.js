@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { HOME, API_ENDPOINT, LOGIN_CUSTOMER } from "../../data";
+import { HOME, API_ENDPOINT, LOGIN_CUSTOMER, FETCH_USER_DETAILS } from "../../data";
 import { Authentication } from "../../services";
 import GlobalNavbar from "../common/GlobalNavbar";
 import "./FlightDetails.css";
+import Switch from "@material-ui/core/Switch";
+
 
 export default class FlightDetails extends Component {
   constructor(props) {
@@ -16,6 +18,8 @@ export default class FlightDetails extends Component {
       departureDate: this.props.location.state.departureDate,
       price: this.props.location.state.price,
       flightDetails: {},
+      userdetails:{},
+      checked: false, 
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBooking = this.handleBooking.bind(this);
@@ -25,6 +29,14 @@ export default class FlightDetails extends Component {
       headers: { Authorization: Authentication.bearerToken },
     });
   }
+
+  handleChange = () =>{
+    
+    this.setState({
+      checked: !(this.state.checked),
+    })
+  }
+  
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -68,6 +80,7 @@ export default class FlightDetails extends Component {
         if (response.data.errors) {
           console.log("Flight not found");
         } else {
+          console.log(response.data.payLoad[0]);
           this.setState({ flightDetails: response.data.payLoad[0] });
         }
       })
@@ -76,6 +89,24 @@ export default class FlightDetails extends Component {
         Authentication.logout();
         this.props.history.push(LOGIN_CUSTOMER);
       });
+
+     
+        this.instance
+          .get(FETCH_USER_DETAILS + "/" + Authentication.userId)
+          .then((response) => {
+            console.log(response);
+            if (response.status === 200) {
+              const userDetails = response.data;
+              this.setState({
+               userdetails : userDetails,
+              });
+            } else {
+              console.log(response.data.errors);
+            }
+          }) 
+          .catch((error) => {
+            console.error(error);
+          });
   }
   render() {
     return (
@@ -96,7 +127,7 @@ export default class FlightDetails extends Component {
               {/* Title */}
               <div id="overview">
                 <h2 className="property-detail-heading">
-                  <strong>{this.state.flightDetails.flightNo}</strong>
+                 {/* <strong>{this.state.flightDetails.flightNo}</strong> */} 
                 </h2>
               </div>
               <hr className="property-line"></hr>
@@ -167,9 +198,19 @@ export default class FlightDetails extends Component {
                       </h1>
                       <h6 className="pbbptt">per seat</h6>
                     </div>
-                    <div class="pbbpc-total">
-                      <h4>Total : ${this.state.flightDetails.price}</h4>
+                    <div>
+                          <h5>Do you want to use your Mileage reward points?</h5>
+                          <Switch checked={this.checked} onChange={this.handleChange} name="checked" />
                     </div>
+                    {console.log(this.state.checked)}
+                    { this.state.checked === true ? (<div class="pbbpc-total">
+                    <h4>Total using Mileage points : ${this.state.flightDetails.price - this.state.userdetails.mileagePoints/10}</h4>
+                    <h6>you're saving ${this.state.userdetails.mileagePoints/10}</h6>
+                  </div>) : ( <div class="pbbpc-total">
+                  <h4>Total : ${this.state.flightDetails.price}</h4>
+                </div>)}
+                    
+                   
                     <button
                       onClick={this.handleBooking}
                       className="btn pbbpc-button"

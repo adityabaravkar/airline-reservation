@@ -5,11 +5,13 @@ const Flight = require("../models/flight.model");
 
 exports.create = async (req, res, next) => {
   try {
+    console.log(req.body);
     const flight = new Flight(req.body);
     const savedFlight = await flight.save();
     res.status(httpStatus.CREATED);
     res.send(savedFlight.transform());
   } catch (error) {
+    console.log(error);
     return next(error);
   }
 };
