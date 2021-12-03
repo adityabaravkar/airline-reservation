@@ -11,3 +11,6 @@ export const CUSTOMER_PROFILE = "/customer/profile";
 export const EMPLOYEE_PROFILE = "/employee/profile";
 
 export const CUSTOMER_FLIGHT_SEARCH = "/customer/search";
+
+export const EMPLOYEE_DASHBOARD = "/employee/dashboard";
+export const CUSTOMER_DASHBOARD = "/customer/dashboard";

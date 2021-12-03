@@ -3,11 +3,11 @@ import axios from "axios";
 import { API_ENDPOINT } from "../../data/environment";
 
 import Navbar from "../common/Navbar.js";
-import "./SignupCustomer.css";
-import { LOGIN_CUSTOMER } from "../../data/";
+import "./SignupEmployee.css";
+import { LOGIN_EMPLOYEE } from "../../data/";
 import { Link } from "react-router-dom";
 
-export default class SignupCustomer extends Component {
+export default class SignupEmployee extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,6 +21,7 @@ export default class SignupCustomer extends Component {
     this.handleLnameChange = this.handleLnameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -40,10 +41,6 @@ export default class SignupCustomer extends Component {
     this.setState({ password: event.target.value });
   }
 
-  componentDidMount() {
-    document.title = "American Airlines :: Signup";
-  }
-
   handleSubmit(e) {
     e.preventDefault();
     const requestBody = {
@@ -51,21 +48,21 @@ export default class SignupCustomer extends Component {
       lname: this.state.lname,
       email: this.state.email,
       password: this.state.password,
-      type: "CUSTOMER",
+      role: "employee",
     };
     axios
       .post(API_ENDPOINT + "/auth/register", requestBody)
       .then((response) => {
+        console.log(response);
         if (response.status === 201) {
-          this.setState({ message: "Registration successful!" });
-        } else {
-          this.setState({ message: response.data.message });
+          this.props.history.push(LOGIN_EMPLOYEE);
         }
       })
       .catch((error) => {
-        if (error.response && error.response.status === 409) {
-          this.setState({ message: "Email address already in use!" });
-        }
+        console.error(error);
+        this.setState({
+          message: "Account could not be created, try different Email Id",
+        });
       });
   }
 
@@ -73,27 +70,30 @@ export default class SignupCustomer extends Component {
     return (
       <div>
         <Navbar></Navbar>
-        <div class="signup-page-wrapper">
-          <div class="container signup-body h-100">
-            <div class="row">
-              <div class="signup-body-title">
-                <h1 class="signup-body-title-head">Sign up</h1>
-                <p class="signup-body-title-body">
+        <div className="signup-page-wrapper">
+          <div className="container signup-body h-100">
+            <div className="row">
+              <div className="signup-body-title">
+                <h1 className="signup-body-title-head">Employee Sign up</h1>
+                <p className="signup-body-title-body">
                   Already have an account?{" "}
-                  <Link to={LOGIN_CUSTOMER}>Log in</Link>
+                  <Link to={LOGIN_EMPLOYEE}>Log in</Link>
                 </p>
               </div>
             </div>
-            <div class="row align-items-center">
-              <div class="signup-wraper col-5 mx-auto">
-                <div class="signup-form">
-                  <div class="signup-form-footer">
+            <div className="row align-items-center">
+              <div className="signup-wraper col-5 mx-auto">
+                <div className="signup-form">
+                  <div className="signup-form-heading">
+                    <p>{this.state.message}</p>
+                  </div>
+                  <div className="signup-form-footer">
                     <form onSubmit={this.handleSubmit}>
-                      <div class="row">
-                        <div class="col signup-input-inline-left">
-                          <div class="input-group signup-input-group ">
+                      <div className="row">
+                        <div className="col signup-input-inline-left">
+                          <div className="input-group signup-input-group ">
                             <input
-                              class="signup-input-text-box form-control"
+                              className="signup-input-text-box form-control"
                               type="text"
                               placeholder="First Name"
                               name="first"
@@ -102,10 +102,10 @@ export default class SignupCustomer extends Component {
                             />
                           </div>
                         </div>
-                        <div class="col signup-input-inline-right">
-                          <div class="input-group signup-input-group">
+                        <div className="col signup-input-inline-right">
+                          <div className="input-group signup-input-group">
                             <input
-                              class="signup-input-text-box form-control"
+                              className="signup-input-text-box form-control"
                               type="text"
                               placeholder="Last Name"
                               name="last"
@@ -115,10 +115,10 @@ export default class SignupCustomer extends Component {
                           </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="input-group signup-input-group">
+                      <div className="row">
+                        <div className="input-group signup-input-group">
                           <input
-                            class="signup-input-text-box form-control"
+                            className="signup-input-text-box form-control"
                             type="text"
                             placeholder="Email address"
                             name="email"
@@ -127,9 +127,9 @@ export default class SignupCustomer extends Component {
                           />
                         </div>
 
-                        <div class="input-group signup-input-group">
+                        <div className="input-group signup-input-group">
                           <input
-                            class="signup-input-text-box form-control"
+                            className="signup-input-text-box form-control"
                             type="password"
                             placeholder="Password"
                             name="password"
@@ -138,10 +138,10 @@ export default class SignupCustomer extends Component {
                           />
                         </div>
 
-                        <div class="input-group signup-input-group">
+                        <div className="input-group signup-input-group">
                           <button
                             type="submit"
-                            class="btn btn-primary btn-lg btn-block signup-button"
+                            className="btn btn-primary btn-lg btn-block signup-button"
                           >
                             Sign Me Up
                           </button>

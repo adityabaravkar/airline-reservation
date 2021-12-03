@@ -1,6 +1,6 @@
 "use strict";
 
-const Flight = require("../models/Flight");
+const Flight = require("../models/flight.model");
 const Seat = require("../models/seat.model");
 const User = require("../models/user.model");
 
