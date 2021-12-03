@@ -46,6 +46,7 @@ export default class Main extends Component {
             path="/employee/dashboard"
             component={DashboardEmployee}
           />
+          <EmployeePrivateRoute path="/employee/profile" component={Profile} />
 
           <Route component={NotFound} />
         </Switch>

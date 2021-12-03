@@ -2,18 +2,60 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Authentication } from "../../services/authentication.js";
 import "./GlobalNavbar.css";
-import {
-  EMPLOYEE_PROFILE,
-  CUSTOMER_PROFILE,
-  LOGOUT,
-} from "../../data/route.js";
+import { LOGOUT } from "../../data/route.js";
 
 export default class GlobalNavbar extends Component {
   render() {
-    const address =
-      Authentication.accountType === "EMPLOYEE"
-        ? EMPLOYEE_PROFILE
-        : CUSTOMER_PROFILE;
+    const employee_menu = (
+      <li className="nav-item dropdown nav-non-btn">
+        <button
+          className="button-link custom-nav-link dropdown-toggle"
+          id="navbarDropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Menu
+        </button>
+        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+          <Link className="dropdown-item" to="/employee/profile">
+            Profile
+          </Link>
+          <Link className="dropdown-item" to="/employee/dashboard">
+            Dashboard
+          </Link>
+          <Link className="dropdown-item" to="/employee/flight/add">
+            Add Flight
+          </Link>
+        </div>
+      </li>
+    );
+
+    const customer_menu = (
+      <li className="nav-item dropdown nav-non-btn">
+        <button
+          className="button-link custom-nav-link dropdown-toggle"
+          id="navbarDropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Menu
+        </button>
+        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+          <Link className="dropdown-item" to="/customer/profile">
+            Profile
+          </Link>
+          <Link className="dropdown-item" to="/customer/dashboard">
+            Dashboard
+          </Link>
+          <Link className="dropdown-item" to="/">
+            Search Flight
+          </Link>
+        </div>
+      </li>
+    );
+
     return (
       <div>
         <header className="global-navbar-header">
@@ -31,6 +73,11 @@ export default class GlobalNavbar extends Component {
                 </div>
                 <div className="col-lg-7"></div>
                 <div className="col-lg-2">
+                  {Authentication.accountType === "employee"
+                    ? employee_menu
+                    : customer_menu}
+                </div>
+                {/* <div className="col-lg-2">
                   <Link to={address}>
                     <span className="global-navbar-element navbar-brand global-navbar-right-icon">
                       <svg
@@ -80,7 +127,7 @@ export default class GlobalNavbar extends Component {
                       <span className="user-profile-text">My Account</span>
                     </span>
                   </Link>
-                </div>
+                </div> */}
                 <div className="col-lg-1">
                   <Link to={LOGOUT}>
                     <i

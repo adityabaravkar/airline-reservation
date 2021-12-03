@@ -39,6 +39,8 @@ export default class FlightDetails extends Component {
       flightId: this.state.flightDetails._id,
       departureDate: this.state.flightDetails.departureDate,
       price: this.state.flightDetails.price,
+      departureFrom: this.state.flightDetails.departureFrom,
+      arrivalAt: this.state.flightDetails.arrivalAt,
     };
     this.instance
       .post("/booking/create", requestBody)
@@ -59,6 +61,7 @@ export default class FlightDetails extends Component {
       });
   }
   componentDidMount() {
+    document.title = "American Airlines :: Flight Details";
     this.instance
       .post("/flight/fetch", { id: this.state.flightId })
       .then((response) => {
