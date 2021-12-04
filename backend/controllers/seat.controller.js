@@ -11,11 +11,11 @@ exports.bookSeat = async (req, res) => {
     return res.status(404).send({ message: "User does not exist" });
   }
 
-  const flight = await Flight.findOne({ email: req.body.flightNo });
+  // const flight = await Flight.findOne({ email: req.body.flightNo });
 
-  if (!flight) {
-    return res.status(404).send({ message: "Flight does not exist" });
-  }
+  // if (!flight) {
+  //   return res.status(404).send({ message: "Flight does not exist" });
+  // }
 
   const seat = await Seat.findOne({
     seatNo: req.body.seatNo,

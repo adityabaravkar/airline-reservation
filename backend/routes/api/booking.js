@@ -7,5 +7,6 @@ const { checkAuth } = require("../../middlewares/authorization");
 
 router.post("/create", checkAuth, bookingController.create);
 router.post("/fetch", checkAuth, bookingController.fetch);
+router.post("/cancelBooking", checkAuth, bookingController.cancelBooking);
 
 module.exports = router;

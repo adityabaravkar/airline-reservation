@@ -20,6 +20,7 @@ export default class Profile extends Component {
       email: "",
       phoneNumber: "",
       address: "",
+      mileagePoints: "",
       displayMessage: "",
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -45,6 +46,7 @@ export default class Profile extends Component {
             email: userDetails.email,
             phoneNumber: userDetails.phoneNumber,
             address: userDetails.address,
+            mileagePoints: userDetails.mileagePoints,
           });
         } else {
           console.log(response.data.errors);
@@ -157,6 +159,7 @@ export default class Profile extends Component {
                                 type="text"
                                 placeholder="Email"
                                 name="email"
+                                disabled
                                 value={this.state.email || ""}
                                 onChange={this.handleInputChange}
                               />
@@ -180,7 +183,7 @@ export default class Profile extends Component {
                       </div>
                       {/* Address */}
                       <div className="row">
-                        <div className="col-12">
+                        <div className="col-6">
                           <div className="profile-fields">
                             <div className="input-group profile-content-input-group">
                               <input
@@ -189,6 +192,24 @@ export default class Profile extends Component {
                                 placeholder="Address"
                                 name="address"
                                 value={this.state.address || ""}
+                                onChange={this.handleInputChange}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6">
+                          <div className="profile-fields">
+                            <div className="input-group profile-content-input-group">
+                              <input
+                                className="profile-content-input-text-box form-control"
+                                type="text"
+                                placeholder="Mileage Points"
+                                name="mileagePoints"
+                                disabled
+                                value={
+                                  "Mileage Points: " +
+                                  (this.state.mileagePoints || "0")
+                                }
                                 onChange={this.handleInputChange}
                               />
                             </div>

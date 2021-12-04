@@ -14,6 +14,7 @@ export default class AddFlight extends Component {
       departureDate: "",
       arrivalDate: "",
       price: "",
+      miles: "",
       percentComplete: 0,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -24,6 +25,8 @@ export default class AddFlight extends Component {
       headers: { Authorization: Authentication.bearerToken },
     });
   }
+
+
 
   handleInputChange(event) {
     const target = event.target;
@@ -181,6 +184,26 @@ export default class AddFlight extends Component {
                               </div>
                             </div>
                           </div>
+                          <hr></hr>
+                        </div>
+                        <div class="list-property-content-contianer-header">
+                          <h3>
+                            <span className="list-property-content-container-header-title">
+                              <strong>
+                                Enter distance
+                              </strong>
+                              <div className="input-group list-property-content-input-group">
+                              <input
+                                className="list-property-content-input-text-box form-control"
+                                type="text"
+                                placeholder="Eg:- 300"
+                                name="miles"
+                                value={this.state.miles || ""}
+                                onChange={this.handleInputChange}
+                              />
+                            </div>
+                            </span>
+                          </h3>
                           <hr></hr>
                         </div>
                         <div className="list-property-content-contianer-footer">

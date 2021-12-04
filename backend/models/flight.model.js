@@ -31,6 +31,10 @@ const flightSchema = new Schema(
       maxlength: 50,
       required: true,
     },
+    miles:{
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -41,12 +45,13 @@ flightSchema.method({
   transform() {
     const transformed = {};
     const fields = [
-      "id",
+      // "id",
       "departureFrom",
       "arrivalAt",
       "departureDate",
       "arrivalDate",
       "price",
+      "miles",
     ];
     fields.forEach((field) => {
       transformed[field] = this[field];
