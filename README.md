@@ -30,3 +30,24 @@ Aditya Pravin Baravkar
 ## Architectural Diagram
 
 ![This image shows the architectural diagram of the project](/meeting_documents/CMPE_202_Arch_Diagram.png)
+
+## Feature Set:
+
+### USER:
+
+- User login Authentication and sessions
+- User Registration
+- Update user details
+- Track and add user mileage reward points based on seat bookings
+
+### BOOKING:
+
+- Booking registration, fetching booking details/statistics and cancellation
+
+### FLIGHT:
+
+- Create a flight, fetch flight details
+
+### SEAT:
+
+- Booking seats and getting a list of booked seats
