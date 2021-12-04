@@ -1,33 +1,37 @@
 import React, { Component } from "react";
 import "../search/Card.css";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import axios from "axios";
 import { Authentication } from "./../../services";
 import { API_ENDPOINT } from "../../data";
 export default class FlightHistory extends Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
-        super(props);
-    
-        this.instance = axios.create({
-          baseURL: API_ENDPOINT,
-          timeout: 1000,
-          headers: { Authorization: Authentication.bearerToken },
-        });
-      }
-     cancelBooking = (bookingId) => {
-         console.log(bookingId);
-        this.instance
-      .post("/booking/cancelBooking", { bookingId: bookingId })
+    this.instance = axios.create({
+      baseURL: API_ENDPOINT,
+      timeout: 1000,
+      headers: { Authorization: Authentication.bearerToken },
+    });
+  }
+  cancelBooking = (bookingId) => {
+    console.log(bookingId);
+    this.instance
+      .post("/booking/cancelBooking", {
+        bookingId: bookingId,
+        customerId: Authentication.userId,
+        flightId: this.props.flight.flightId,
+      })
       .then((response) => {
-        if(response.status === 200){
-            alert("Cancelled");
+        if (response.status === 200) {
+          alert("Cancelled");
+          this.props.reload();
         }
       })
-      .catch(error =>{
+      .catch((error) => {
         console.log(error);
-    });
-    }
+      });
+  };
 
   render() {
     return (
@@ -48,11 +52,9 @@ export default class FlightHistory extends Component {
                 </div>
                 {console.log(this.props.flight)}
                 <div className="row">
-                  
-                    <h5 class="card-property-title">
-                      Departure From: {this.props.flight.departureFrom}
-                    </h5>
-                  
+                  <h5 class="card-property-title">
+                    Departure From: {this.props.flight.departureFrom}
+                  </h5>
                 </div>
                 <div className="row">
                   <div class="card-property-detail">
@@ -63,7 +65,6 @@ export default class FlightHistory extends Component {
                       Date:{" "}
                       {new Date(this.props.flight.departureDate).toDateString()}
                     </div>
-                    
                   </div>
                 </div>
                 <div className="row">
@@ -82,17 +83,18 @@ export default class FlightHistory extends Component {
                           per person
                         </span>
                       </span>
-                     
                     </div>
                   </div>
                 </div>
-                
               </div>
-              <Button variant="outlined" color="error" onClick = {() => this.cancelBooking(this.props.flight._id)}>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => this.cancelBooking(this.props.flight._id)}
+              >
                 Cancel booking
               </Button>
             </div>
-            
           </div>
         </div>
       </div>

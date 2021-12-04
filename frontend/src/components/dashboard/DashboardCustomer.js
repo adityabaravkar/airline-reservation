@@ -20,6 +20,7 @@ export default class DashboardCustomer extends Component {
       timeout: 1000,
       headers: { Authorization: Authentication.bearerToken },
     });
+    this.reload = this.reload.bind(this);
   }
   componentDidMount() {
     this.instance
@@ -41,12 +42,17 @@ export default class DashboardCustomer extends Component {
         });
       });
   }
+  reload() {
+    this.componentDidMount();
+  }
 
   render() {
     var details;
     try {
       details = this.state.bookingList.map((booking) => {
-        return <FlightHistory flight={booking}></FlightHistory>;
+        return (
+          <FlightHistory flight={booking} reload={this.reload}></FlightHistory>
+        );
       });
     } catch (error) {
       details = "No bookings to show.";
