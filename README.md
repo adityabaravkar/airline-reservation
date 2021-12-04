@@ -51,3 +51,9 @@ Aditya Pravin Baravkar
 ### SEAT:
 
 - Booking seats and getting a list of booked seats
+
+## Wireframes/protoypes
+
+! [The image shows user login screen and home screen drafts](/meeting_documents/lofi_prototype_file_1.jpg)
+
+! [The image shows user account screen and seat selection screen drafts](/meeting_documents/lofi_prototype_file_2.jpg)
