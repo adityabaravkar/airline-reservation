@@ -6,6 +6,12 @@ import GlobalNavbar from "../common/GlobalNavbar";
 import "./FlightDetails.css";
 import Switch from "@material-ui/core/Switch";
 
+import InputLabel from '@mui/material/InputLabel';
+
+import FormControl from '@mui/material/FormControl';
+import NativeSelect from '@mui/material/NativeSelect';
+
+
 
 export default class FlightDetails extends Component {
   constructor(props) {
@@ -20,6 +26,8 @@ export default class FlightDetails extends Component {
       flightDetails: {},
       userdetails:{},
       checked: false, 
+      row: "",
+      seat: "",
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBooking = this.handleBooking.bind(this);
@@ -36,6 +44,20 @@ export default class FlightDetails extends Component {
       checked: !(this.state.checked),
     })
   }
+
+  confirmRow = (event) => {
+    console.log(event.target.value);
+    this.setState({
+      row: event.target.value,
+    })
+  }
+
+  confirmSeat = (event) => {
+    console.log(event.target.value);
+    this.setState({
+      seat: event.target.value,
+    })
+  }
   
   handleInputChange(event) {
     const target = event.target;
@@ -47,6 +69,7 @@ export default class FlightDetails extends Component {
   }
   handleBooking() {
 
+    console.log(this.state.checked);
     if(this.state.checked){
       this.setState({
         price : this.state.flightDetails.price - this.state.userdetails.mileagePoints/10,
@@ -64,6 +87,8 @@ export default class FlightDetails extends Component {
       departureFrom: this.state.flightDetails.departureFrom,
       arrivalAt: this.state.flightDetails.arrivalAt,
       checked: this.state.checked,
+      seatNo: this.state.seat,
+      row: this.state.row,
     };
     this.instance
       .post("/booking/create", requestBody)
@@ -121,6 +146,7 @@ export default class FlightDetails extends Component {
   }
   render() {
     return (
+      <div>
       <div>
         <GlobalNavbar></GlobalNavbar>
         <div className="container property-container">
@@ -193,17 +219,25 @@ export default class FlightDetails extends Component {
                     </tr>
                   </tbody>
                 </table>
+                
               </div>
+              
             </div>
+
+           
+          
             <div className="col-3 property-pricing-booking">
               <div className="property-booking-assistance">
                 Book Online or call American Airlines Booking Assistance
                 888-829-7076
               </div>
               <div className="property-booking-block affix-top">
+               
                 <div className="property-booking-block-container">
+               
                   <div className="property-booking-block-price-calculator">
                     <div className="property-booking-block-price-text">
+                   
                       <h1 className="pbbptt">
                         ${this.state.flightDetails.price}
                       </h1>
@@ -235,6 +269,58 @@ export default class FlightDetails extends Component {
           </div>
         </div>
       </div>
+      <div >
+      <h3>Select Row and Seat number</h3>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <InputLabel variant="standard" htmlFor="uncontrolled-native">
+        Row
+      </InputLabel>
+      <NativeSelect
+        defaultValue={"B"}
+        inputProps={{
+          name: 'row',
+          id: 'uncontrolled-native',
+        }}
+        value={this.state.row}
+                  onChange={this.confirmRow}
+      >
+        <option value={"A"}>A</option>
+        <option value={"B"}>B</option>
+        <option value={"C"}>C</option>
+        <option value={"D"}>D</option>
+        <option value={"E"}>E</option>
+        <option value={"F"}>F</option>
+      </NativeSelect>
+    </FormControl>
+             
+              <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                  Seat No
+                </InputLabel>
+                <NativeSelect
+                  defaultValue={6}
+                  inputProps={{
+                    name: 'seatNo',
+                    id: 'uncontrolled-native',
+                  }}
+                  value={this.state.seat}
+                  onChange={this.confirmSeat}
+                >
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                  <option value={5}>5</option>
+                  <option value={6}>6</option>
+                  <option value={7}>7</option>
+                  <option value={8}>8</option>
+                  <option value={9}>9</option>
+                  <option value={10}>10</option>
+                </NativeSelect>
+              </FormControl>
+            
+            </div>
+            </div>
     );
   }
 }

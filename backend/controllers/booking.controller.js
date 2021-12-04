@@ -60,7 +60,7 @@ exports.cancelBooking = async (req, res, next) => {
     //fix this
     const newMileagePoints = user.mileagePoints - flight.miles;
     await User.updateOne(
-      { userID: user._id },
+      { _id: user._id },
       { mileagePoints: newMileagePoints }
     );
 

@@ -35,6 +35,14 @@ const bookingSchema = new Schema(
       type: Number,
       required: true,
     },
+    seatNo: {
+      type: Number,
+      required: true,
+    },
+    row:{
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -51,6 +59,8 @@ bookingSchema.method({
       "arrivalAt",
       "departureDate",
       "price",
+      "seatNo",
+      "row",
     ];
     fields.forEach((field) => {
       transformed[field] = this[field];
