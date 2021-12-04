@@ -202,7 +202,7 @@ export default class Search extends Component {
                       class="search-box-input-text-box form-control border-left-0"
                       name="departureDate"
                       type="text"
-                      placeholder="Departure Date"
+                      placeholder="Date (MM/DD/YYYY)"
                       value={this.state.departureDate || ""}
                       onChange={this.handleInputChange}
                     />
