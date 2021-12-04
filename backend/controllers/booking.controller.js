@@ -21,9 +21,13 @@ exports.create = async (req, res, next) => {
     if (!flight) {
       return res.status(404).send({ message: "Flight does not exist" });
     }
+    const newMileagePoints = user.mileagePoints;
+    if(req.body.checked){
+       newMileagePoints = flight.miles;
+    }else{
+       newMileagePoints = newMileagePoints + flight.miles;
+    }
     
-    //fix this
-    const newMileagePoints = user.mileagePoints + flight.miles;
     await User.updateOne({_id: user._id}, {mileagePoints : newMileagePoints});
 
     const booking = new Booking(req.body);
@@ -36,8 +40,8 @@ exports.create = async (req, res, next) => {
   }
 };
 
-exports.cancelBooking = async (req, res) => {
-  
+exports.cancelBooking = async (req, res, next) => {
+  try{
   const bookingId = req.body.bookingId;
   const user = await User.findOne({ _id: req.body.customerId });
 
@@ -55,14 +59,16 @@ exports.cancelBooking = async (req, res) => {
   const newMileagePoints = user.mileagePoints - flight.miles;
   await User.updateOne({userID: user._id}, {mileagePoints : newMileagePoints});
 
-  Booking.deleteOne({bookingId : bookingId}, (err, result) =>{
+  Booking.deleteOne({_id : bookingId}, (err, result) =>{
     if(err){
       console.log(err);
     }else{
       re.status(200).send(result);
     }
   });
-
+  }catch(error){
+    return next(error);
+  }
 }
 
 exports.fetch = async (req, res, next) => {

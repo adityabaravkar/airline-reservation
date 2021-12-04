@@ -5,7 +5,7 @@ import axios from "axios";
 import { Authentication } from "./../../services";
 import { API_ENDPOINT, HOME } from "../../data";
 import GlobalNavbar from "../common/GlobalNavbar.js";
-import Card from "../search/Card";
+import FlightHistory from "./flightHistory";
 
 export default class DashboardCustomer extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ export default class DashboardCustomer extends Component {
     var details;
     try {
       details = this.state.bookingList.map((booking) => {
-        return <Card flight={booking}></Card>;
+        return <FlightHistory flight={booking}></FlightHistory>;
       });
     } catch (error) {
       details = "No bookings to show.";

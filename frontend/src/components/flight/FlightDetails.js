@@ -46,13 +46,24 @@ export default class FlightDetails extends Component {
     });
   }
   handleBooking() {
+
+    if(this.state.checked){
+      this.setState({
+        price : this.state.flightDetails.price - this.state.userdetails.mileagePoints/10,
+      })
+    }else{
+      this.setState({
+        price : this.state.flightDetails.price,
+      })
+    }
     const requestBody = {
       customerId: Authentication.userId,
       flightId: this.state.flightDetails._id,
       departureDate: this.state.flightDetails.departureDate,
-      price: this.state.flightDetails.price,
+      price: this.state.price,
       departureFrom: this.state.flightDetails.departureFrom,
       arrivalAt: this.state.flightDetails.arrivalAt,
+      checked: this.state.checked,
     };
     this.instance
       .post("/booking/create", requestBody)
@@ -140,7 +151,7 @@ export default class FlightDetails extends Component {
                   <div class="col-10">
                     <div class="property-description">
                       <p align="justify">
-                        {this.state.flightDetails.description}
+                        { /*this.state.flightDetails.description */}
                       </p>
                     </div>
                   </div>
