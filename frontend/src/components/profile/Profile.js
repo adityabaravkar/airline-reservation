@@ -100,6 +100,24 @@ export default class Profile extends Component {
   }
 
   render() {
+    const mileagePointsDisplay = (
+      <div className="col-6">
+        <div className="profile-fields">
+          <div className="input-group profile-content-input-group">
+            <input
+              className="profile-content-input-text-box form-control"
+              type="text"
+              placeholder="Mileage Points"
+              name="mileagePoints"
+              disabled
+              value={"Mileage Points: " + (this.state.mileagePoints || "0")}
+              onChange={this.handleInputChange}
+            />
+          </div>
+        </div>
+      </div>
+    );
+
     return (
       <div>
         <GlobalNavbar></GlobalNavbar>
@@ -197,24 +215,9 @@ export default class Profile extends Component {
                             </div>
                           </div>
                         </div>
-                        <div className="col-6">
-                          <div className="profile-fields">
-                            <div className="input-group profile-content-input-group">
-                              <input
-                                className="profile-content-input-text-box form-control"
-                                type="text"
-                                placeholder="Mileage Points"
-                                name="mileagePoints"
-                                disabled
-                                value={
-                                  "Mileage Points: " +
-                                  (this.state.mileagePoints || "0")
-                                }
-                                onChange={this.handleInputChange}
-                              />
-                            </div>
-                          </div>
-                        </div>
+                        {Authentication.accountType === "customer"
+                          ? mileagePointsDisplay
+                          : ""}
                       </div>
                       <hr></hr>
                     </div>
