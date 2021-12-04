@@ -26,8 +26,6 @@ export default class AddFlight extends Component {
     });
   }
 
-
-
   handleInputChange(event) {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -36,7 +34,7 @@ export default class AddFlight extends Component {
     for (var member in this.state) {
       if (this.state[member] !== "") count++;
     }
-    var percentDone = Math.floor((4 * (count - 2)) / 5) * 25;
+    var percentDone = Math.floor((4 * (count - 2)) / 6) * 25;
     this.setState({
       [name]: value,
       percentComplete: percentDone,
@@ -189,19 +187,17 @@ export default class AddFlight extends Component {
                         <div class="list-property-content-contianer-header">
                           <h3>
                             <span className="list-property-content-container-header-title">
-                              <strong>
-                                Enter distance
-                              </strong>
+                              <strong>Enter distance</strong>
                               <div className="input-group list-property-content-input-group">
-                              <input
-                                className="list-property-content-input-text-box form-control"
-                                type="text"
-                                placeholder="Eg:- 300"
-                                name="miles"
-                                value={this.state.miles || ""}
-                                onChange={this.handleInputChange}
-                              />
-                            </div>
+                                <input
+                                  className="list-property-content-input-text-box form-control"
+                                  type="text"
+                                  placeholder="Eg:- 300"
+                                  name="miles"
+                                  value={this.state.miles || ""}
+                                  onChange={this.handleInputChange}
+                                />
+                              </div>
                             </span>
                           </h3>
                           <hr></hr>

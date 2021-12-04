@@ -60,11 +60,43 @@ exports.cancelBooking = async (req, res, next) => {
     //fix this
     const newMileagePoints = user.mileagePoints - flight.miles;
     await User.updateOne(
-      { userID: user._id },
+      { _id: user._id },
       { mileagePoints: newMileagePoints }
     );
 
     Booking.deleteOne({ _id: bookingId }, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).send(result);
+      }
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+
+exports.updateBooking = async (req, res, next) => {
+  console.log(req.body);
+  try {
+    const bookingId = req.body.bookingId;
+    const user = await User.findOne({ _id: req.body.customerId });
+
+    if (!user) {
+      return res.status(404).send({ message: "User does not exist" });
+    }
+
+    const flight = await Flight.findOne({ _id: req.body.flightId });
+
+    if (!flight) {
+      return res.status(404).send({ message: "Flight does not exist" });
+    }
+
+    //fix this
+    console.log(req.body.row);
+
+   Booking.findOneAndUpdate({ "_id": bookingId }, { "$set": { "seatNo": req.body.seatNo, "row": req.body.row } }).exec(function (err, result) {
       if (err) {
         console.log(err);
       } else {
