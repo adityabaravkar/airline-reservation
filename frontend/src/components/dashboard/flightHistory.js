@@ -32,6 +32,8 @@ export default class FlightHistory extends Component {
 
     this.state = {
         open : false,
+        row : "",
+        seat: "",
     }
 
     this.instance = axios.create({
@@ -46,6 +48,21 @@ export default class FlightHistory extends Component {
         open : !(this.state.open),
     })
   }
+
+  confirmRow = (event) => {
+    console.log(event.target.value);
+    this.setState({
+      row: event.target.value,
+    })
+  }
+
+  confirmSeat = (event) => {
+    console.log(event.target.value);
+    this.setState({
+      seat: event.target.value,
+    })
+  }
+
   cancelBooking = (bookingId) => {
     console.log(bookingId);
     this.instance
@@ -63,6 +80,30 @@ export default class FlightHistory extends Component {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  updateSeat = (bookingId) => {
+    console.log(bookingId);
+    this.instance
+      .post("/booking/updateBooking", {
+        bookingId: bookingId,
+        customerId: Authentication.userId,
+        flightId: this.props.flight.flightId,
+        seatNo : this.state.seat,
+        row: this.state.row,
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Booking updated successfully");
+          this.props.reload();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      this.setState({
+        open : !(this.state.open),
+    })
   };
 
   render() {
@@ -98,12 +139,15 @@ export default class FlightHistory extends Component {
                       {new Date(this.props.flight.departureDate).toDateString()}
                     </div>
                   </div>
+                  
                 </div>
+                <div> <h6>Seat number :  {this.props.flight.row + this.props.flight.seatNo} </h6></div>
                 <div className="row">
                   <div class="card-property-footer">
                     <span class="card-property-footer-rating">
                       <strong>Wonderful!</strong>&nbsp;&nbsp;<span>4.8/5</span>
                     </span>
+                    
                     <div class="card-property-footer-price">
                       <span class="card-property-footer-price-text">
                         <strong>
@@ -175,7 +219,7 @@ export default class FlightHistory extends Component {
                       id: 'uncontrolled-native',
                     }}
                     value={this.state.seat}
-                    onChange={this.confirmSeat}
+                    onChange={ this.confirmSeat}
                   >
                     <option value={1}>1</option>
                     <option value={2}>2</option>
