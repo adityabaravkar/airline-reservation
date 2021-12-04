@@ -29,4 +29,4 @@ Aditya Pravin Baravkar
 
 ## Architectural Diagram
 
-!(/meeting_documents/CMPE_202_Arch_Diagram.png)
+![This image shows the architectural diagram of the project](/meeting_documents/CMPE_202_Arch_Diagram.png)
