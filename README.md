@@ -12,7 +12,7 @@ Saumil Shah,
 
 Aditya Pravin Baravkar
 
-# Installed modules
+## Installed modules
 
 - npm (node packet manager)
 - express
@@ -26,3 +26,7 @@ Aditya Pravin Baravkar
 - request
 - nodemon
 - concurrently
+
+## Architectural Diagram
+
+!(/meeting_documents/CMPE_202_Arch_Diagram.png)
