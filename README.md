@@ -1,31 +1,6 @@
-# team-project-avatar-2
+# Airline reservation system
 
-team-project-avatar-2 created by GitHub Classroom
-
-## Team members:
-
-Shahbaz Singh Mansahia,
-
-Derian Lemus,
-
-Saumil Shah,
-
-Aditya Pravin Baravkar
-
-## Installed modules
-
-- npm (node packet manager)
-- express
-- npm mongoose-paginate
-- gravatar
-- express-validator
-- bcryptjs
-- config
-- jsonwebtoken
-- mongoose
-- request
-- nodemon
-- concurrently
+A web application with functionalities such as managing rewards accounts, searching for flights, purchasing seats, change/canceling reservations.
 
 ## Architectural Diagram
 
@@ -51,12 +26,6 @@ Aditya Pravin Baravkar
 ### SEAT:
 
 - Booking seats and getting a list of booked seats
-
-## Wireframes/protoypes
-
-![The image shows user login screen and home screen drafts](/meeting_documents/lofi_prototype_file_1.jpg)
-
-![The image shows user account screen and seat selection screen drafts](/meeting_documents/lofi_prototype_file_2.jpg)
 
 # Project Notes
 
